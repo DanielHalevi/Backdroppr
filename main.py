@@ -210,7 +210,7 @@ def post_process(filename, cropvalue, item_path, bitrate):
                     logging.info("Subs found")
                     sub_file = f"-i \"cache/{filename}.en.vtt\" -map 0:v -map 0:a -map 1 -metadata:s:s:0 language=eng " \
                                f"-disposition:s:0 forced -c:s ssa "
-            subprocess.check_call(f'ffmpeg -i "{filename}" {sub_file} -threads {thread_count} -vf {cropvalue} -c:v libx264 -b:v {bitrate*140}'
+            subprocess.check_call(f'ffmpeg -i "{filename}" {sub_file} -threads {thread_count} -vf {cropvalue} -c:v libx264 -b:v {bitrate*140} '
                                   f'-maxrate {bitrate*140} -bufsize 2M -preset slow -c:a aac -af "volume=-7dB" '
                                   f'-y "{item_path}/{config["output_dirs"].split(",")[0]}/video1.mp4"',
                                         shell=True)
